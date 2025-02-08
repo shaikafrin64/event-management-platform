@@ -19,19 +19,52 @@ const Auth = () => {
   };
 
   return (
-    <div className="flex flex-col items-center mt-10">
-      <h2 className="text-2xl mb-4">{isLogin ? "Login" : "Register"}</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col w-80">
-        {!isLogin && (
-          <input className="border p-2 mb-2" type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
-        )}
-        <input className="border p-2 mb-2" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <input className="border p-2 mb-2" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        <button className="bg-blue-500 text-white p-2">{isLogin ? "Login" : "Register"}</button>
-      </form>
-      <button className="text-blue-500 mt-2" onClick={() => setIsLogin(!isLogin)}>
-        {isLogin ? "Don't have an account? Register" : "Already have an account? Login"}
-      </button>
+    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-purple-50 flex items-center justify-center">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-96 transform transition-all hover:shadow-xl">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          {isLogin ? "Login" : "Register"}
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {!isLogin && (
+            <input
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          )}
+          <input
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            {isLogin ? "Login" : "Register"}
+          </button>
+        </form>
+        <button
+          className="w-full text-blue-600 mt-4 hover:underline"
+          onClick={() => setIsLogin(!isLogin)}
+        >
+          {isLogin ? "Don't have an account? Register" : "Already have an account? Login"}
+        </button>
+      </div>
     </div>
   );
 };

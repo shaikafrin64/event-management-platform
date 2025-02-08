@@ -10,13 +10,35 @@ const CreateEvent = () => {
   };
 
   return (
-    <div className="flex flex-col items-center mt-10">
-      <h2 className="text-2xl mb-4">Create Event</h2>
-      <form onSubmit={handleCreateEvent} className="flex flex-col w-80">
-        <input className="border p-2 mb-2" type="text" placeholder="Event Name" value={eventName} onChange={(e) => setEventName(e.target.value)} required />
-        <textarea className="border p-2 mb-2" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
-        <button className="bg-blue-500 text-white p-2">Create</button>
-      </form>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-purple-50">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-96 hover:shadow-xl transform transition-all">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          Create Event
+        </h2>
+        <form onSubmit={handleCreateEvent} className="space-y-4">
+          <input
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="text"
+            placeholder="Event Name"
+            value={eventName}
+            onChange={(e) => setEventName(e.target.value)}
+            required
+          />
+          <textarea
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-all"
+          >
+            Create Event
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
