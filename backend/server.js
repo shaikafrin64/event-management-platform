@@ -1,22 +1,22 @@
 require('dotenv').config();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+console.log("MongoDB URI:", process.env.MONGO_URI); // Debugging line
 
-const uri = process.env.MONGO_URI;
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+const express = require('express');
+const mongoose = require('mongoose');
 
-async function connectDB() {
-    try {
-        await client.connect();
-        console.log("✅ Connected to MongoDB Atlas");
-    } catch (error) {
-        console.error("❌ MongoDB connection error:", error);
-    }
+const app = express();
+
+// Check if the .env file is loaded properly
+if (!process.env.MONGO_URI) {
+  console.error("❌ MONGO_URI is not defined. Check your .env file.");
+  process.exit(1); // Stop the server if there's no MongoDB connection string
 }
 
-connectDB();
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+.then(() => console.log('✅ MongoDB Connected'))
+.catch(err => console.error('❌ MongoDB Connection Error:', err));
+
+app.listen(5000, () => console.log('🚀 Server running on port 5000'));

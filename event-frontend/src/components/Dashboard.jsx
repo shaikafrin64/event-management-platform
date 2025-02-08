@@ -1,27 +1,26 @@
-import { Link } from "react-router-dom";
-import Navbar from "./Navbar";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
-  const events = [
-    { id: 1, name: "React Workshop", date: "2025-02-10" },
-    { id: 2, name: "Hackathon", date: "2025-03-15" },
-  ];
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/events")
+      .then((res) => res.json())
+      .then((data) => setEvents(data));
+  }, []);
 
   return (
-    <div>
-      <Navbar />
-      <h1 className="text-3xl text-center mt-10">Your Events</h1>
-      <div className="flex flex-col items-center mt-5">
+    <div className="p-6">
+      <h2 className="text-3xl font-bold mb-4">Upcoming Events</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {events.map((event) => (
-          <div key={event.id} className="border p-4 w-80 my-2">
-            <h2 className="text-xl">{event.name}</h2>
+          <div key={event._id} className="bg-white p-4 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold">{event.title}</h3>
             <p>{event.date}</p>
-            <Link className="text-blue-500" to={`/event/${event.id}`}>View Details</Link>
+            <p>{event.description}</p>
+            <button className="btn mt-2">View Details</button>
           </div>
         ))}
-      </div>
-      <div className="flex justify-center mt-5">
-        <Link className="bg-green-500 text-white p-2" to="/create-event">Create Event</Link>
       </div>
     </div>
   );
