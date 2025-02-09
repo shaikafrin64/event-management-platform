@@ -1,26 +1,32 @@
-import { useEffect, useState } from "react";
+import EventCard from "../components/EventCard";
 
 const Dashboard = () => {
-  const [events, setEvents] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/api/events")
-      .then((res) => res.json())
-      .then((data) => setEvents(data));
-  }, []);
+  const events = [
+    {
+      id: 1,
+      name: "Tech Conference 2023",
+      description: "A conference on the latest in technology.",
+      date: "2023-12-15",
+      image: "https://via.placeholder.com/400x200",
+    },
+    {
+      id: 2,
+      name: "Music Festival",
+      description: "Annual music festival with top artists.",
+      date: "2023-12-20",
+      image: "https://via.placeholder.com/400x200",
+    },
+  ];
 
   return (
-    <div className="p-6">
-      <h2 className="text-3xl font-bold mb-4">Upcoming Events</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {events.map((event) => (
-          <div key={event._id} className="bg-white p-4 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold">{event.title}</h3>
-            <p>{event.date}</p>
-            <p>{event.description}</p>
-            <button className="btn mt-2">View Details</button>
-          </div>
-        ))}
+    <div className="min-h-screen bg-gray-100 p-8">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-3xl font-bold text-gray-800 mb-8">Dashboard</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {events.map((event) => (
+            <EventCard key={event.id} event={event} />
+          ))}
+        </div>
       </div>
     </div>
   );
